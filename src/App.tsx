@@ -42,7 +42,10 @@ function SoilSampleForm({ onSubmit, loading }: { onSubmit: (data: any) => void, 
 import { useState, useEffect } from 'react'
 import MapPicker from './MapPicker'
 
-const API = '/api'
+const rawApiBase = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/$/, '')
+const API = rawApiBase
+  ? (rawApiBase.endsWith('/api') ? rawApiBase : `${rawApiBase}/api`)
+  : '/api'
 
 type Stats = {
   total_locations: number
